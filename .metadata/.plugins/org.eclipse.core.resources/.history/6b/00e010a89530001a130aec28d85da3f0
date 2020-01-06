@@ -23,7 +23,7 @@ import com.luu.model.request.CreateUserRequest;
 import com.luu.repository.UserRepository;
 import com.luu.service.UserService;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = CrudExerciseApplication.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = UserController.class)
 @AutoConfigureMockMvc
 public class UserControllerIntergrationTest {
 	
