@@ -1,0 +1,72 @@
+package com.luu.controller;
+
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+import com.luu.CrudExerciseApplication;
+import com.luu.entity.User;
+import com.luu.model.dto.UserDTO;
+import com.luu.repository.UserRepository;
+import com.luu.service.UserService;
+
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = CrudExerciseApplication.class)
+@AutoConfigureMockMvc
+public class UserControllerIntergrationTest {
+	
+	@Autowired
+	private MockMvc mockMvc;
+	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private UserRepository userRepository;
+
+	 @Test
+	 public void getAllUsers() throws Exception {
+		createUsers();
+		List<UserDTO> users = Arrays.asList(
+	            new UserDTO(1, "Luu", "luu@gmail.com", "Phu Tho"),
+	            new UserDTO(2, "Luu1", "luu1@gmail.com", "Phu Tho1"));
+	    when(userService.getAllUsers()).thenReturn(users);
+	    mockMvc.perform(MockMvcRequestBuilders
+	    	    .get("/api/user").contentType(MediaType.APPLICATION_JSON))
+	            .andDo(print())
+	            .andExpect(status().isOk());
+	    }
+	 
+	 public void createUsers() {
+		 User user = new User("Luu", "luu@gmail.com", "Phu Tho");
+		 User user1 = new User("Luu1", "luu1@gmail.com", "Phu Tho1");
+	     userRepository.saveAndFlush(user);
+	     userRepository.saveAndFlush(user1);	        
+	 }
+	 
+	 @Test
+	 public void createUser() throws Exception 
+	 {
+	   mockMvc.perform( MockMvcRequestBuilders
+	       .post("/api/user")
+	       .content(asJsonString(new User("Luu", "luu@gmail.com", "Phu Tho")))
+	       .contentType(MediaType.APPLICATION_JSON)
+	       .accept(MediaType.APPLICATION_JSON))
+	       .andExpect(status().isCreated())
+	       .andExpect(MockMvcResultMatchers.jsonPath("$.employeeId").exists());
+	 }
+
+	  
+
+}

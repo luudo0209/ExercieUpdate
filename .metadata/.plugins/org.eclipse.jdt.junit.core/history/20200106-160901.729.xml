@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="UserControllerIntergrationTest" project="CRUDExercise" tests="2" started="1" failures="0" errors="0" ignored="0">
-  <testsuite name="com.luu.controller.UserControllerIntergrationTest" incomplete="true">
-    <testcase name="getUserByEmail" classname="com.luu.controller.UserControllerIntergrationTest" incomplete="true"/>
-    <testcase name="testAddEmployee" classname="com.luu.controller.UserControllerIntergrationTest" incomplete="true"/>
-  </testsuite>
-</testrun>
