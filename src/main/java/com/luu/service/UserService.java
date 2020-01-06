@@ -42,6 +42,7 @@ public class UserService implements IUserService{
 				user.setUserName(createUserRequest.getUserName());
 				user.setEmail(createUserRequest.getEmail());
 				user.setAddress(createUserRequest.getAddress());
+				userRepository.save(user);
 				return user;
 			}
 		}
@@ -77,6 +78,8 @@ public class UserService implements IUserService{
 		List<UserDTO> userDTOList = new ArrayList<>();
 		for (User user : userList) {
 			UserDTO userDTO = new UserDTO();
+			UserMapper.toUserDto(user);
+			userDTO.setId(user.getUserId());
 			userDTO.setUserName(user.getUserName());
 			userDTO.setEmail(user.getEmail());
 			userDTO.setAddress(user.getAddress());

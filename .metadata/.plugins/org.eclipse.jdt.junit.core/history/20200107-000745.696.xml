@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="Rerun UserControllerIntergrationTest" project="CRUDExercise" tests="5" started="5" failures="0" errors="0" ignored="0">
+  <testsuite name="com.luu.controller.UserControllerIntergrationTest" time="6.638" displayname="UserControllerIntergrationTest" uniqueid="[engine:junit-jupiter]/[class:com.luu.controller.UserControllerIntergrationTest]">
+    <testcase name="getAllUsersTest" classname="com.luu.controller.UserControllerIntergrationTest" time="1.075" displayname="getAllUsersTest()" uniqueid="[engine:junit-jupiter]/[class:com.luu.controller.UserControllerIntergrationTest]/[method:getAllUsersTest()]"/>
+    <testcase name="findUserByIdTest" classname="com.luu.controller.UserControllerIntergrationTest" time="3.24" displayname="findUserByIdTest()" uniqueid="[engine:junit-jupiter]/[class:com.luu.controller.UserControllerIntergrationTest]/[method:findUserByIdTest()]"/>
+    <testcase name="updateUserTest" classname="com.luu.controller.UserControllerIntergrationTest" time="0.812" displayname="updateUserTest()" uniqueid="[engine:junit-jupiter]/[class:com.luu.controller.UserControllerIntergrationTest]/[method:updateUserTest()]"/>
+    <testcase name="createUserTest" classname="com.luu.controller.UserControllerIntergrationTest" time="1.122" displayname="createUserTest()" uniqueid="[engine:junit-jupiter]/[class:com.luu.controller.UserControllerIntergrationTest]/[method:createUserTest()]"/>
+    <testcase name="deleteUserTest" classname="com.luu.controller.UserControllerIntergrationTest" time="0.389" displayname="deleteUserTest()" uniqueid="[engine:junit-jupiter]/[class:com.luu.controller.UserControllerIntergrationTest]/[method:deleteUserTest()]"/>
+  </testsuite>
+</testrun>

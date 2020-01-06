@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="java" project="CRUDExercise" tests="10" started="5" failures="0" errors="1" ignored="0">
+  <testsuite name="com.luu.service.UserServiceTest" time="5.122" displayname="UserServiceTest" uniqueid="[engine:junit-jupiter]/[class:com.luu.service.UserServiceTest]">
+    <testcase name="getAllUsersTest" classname="com.luu.service.UserServiceTest" time="0.0" displayname="getAllUsersTest()" uniqueid="[engine:junit-jupiter]/[class:com.luu.service.UserServiceTest]/[method:getAllUsersTest()]"/>
+    <testcase name="updateUserTest" classname="com.luu.service.UserServiceTest" time="0.0" displayname="updateUserTest()" uniqueid="[engine:junit-jupiter]/[class:com.luu.service.UserServiceTest]/[method:updateUserTest()]"/>
+    <testcase name="createUserTest" classname="com.luu.service.UserServiceTest" time="0.072" displayname="createUserTest()" uniqueid="[engine:junit-jupiter]/[class:com.luu.service.UserServiceTest]/[method:createUserTest()]"/>
+    <testcase name="deleteUserTest" classname="com.luu.service.UserServiceTest" time="5.049" displayname="deleteUserTest()" uniqueid="[engine:junit-jupiter]/[class:com.luu.service.UserServiceTest]/[method:deleteUserTest()]"/>
+  </testsuite>
+  <testsuite name="com.luu.CrudExerciseApplicationTests" time="0.011" displayname="CrudExerciseApplicationTests" uniqueid="[engine:junit-jupiter]/[class:com.luu.CrudExerciseApplicationTests]">
+    <testcase name="contextLoads" classname="com.luu.CrudExerciseApplicationTests" time="0.011" displayname="contextLoads()" uniqueid="[engine:junit-jupiter]/[class:com.luu.CrudExerciseApplicationTests]/[method:contextLoads()]"/>
+  </testsuite>
+  <testsuite name="com.luu.controller.UserControllerIntergrationTest" incomplete="true" displayname="UserControllerIntergrationTest" uniqueid="[engine:junit-jupiter]/[class:com.luu.controller.UserControllerIntergrationTest]">
+    <error>org.junit.platform.commons.JUnitException: @BeforeAll method 'public void com.luu.controller.UserControllerIntergrationTest.setup() throws java.lang.Exception' must be static unless the test class is annotated with @TestInstance(Lifecycle.PER_CLASS).&#13;
+	at org.junit.jupiter.engine.descriptor.LifecycleMethodUtils.assertStatic(LifecycleMethodUtils.java:57)&#13;
+	at org.junit.jupiter.engine.descriptor.LifecycleMethodUtils.lambda$findMethodsAndAssertStatic$0(LifecycleMethodUtils.java:81)&#13;
+	at java.util.ArrayList.forEach(ArrayList.java:1257)&#13;
+	at java.util.Collections$UnmodifiableCollection.forEach(Collections.java:1082)&#13;
+	at org.junit.jupiter.engine.descriptor.LifecycleMethodUtils.findMethodsAndAssertStatic(LifecycleMethodUtils.java:81)&#13;
+	at org.junit.jupiter.engine.descriptor.LifecycleMethodUtils.findBeforeAllMethods(LifecycleMethodUtils.java:40)&#13;
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.prepare(ClassBasedTestDescriptor.java:161)&#13;
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.prepare(ClassBasedTestDescriptor.java:77)&#13;
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$prepare$1(NodeTestTask.java:107)&#13;
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)&#13;
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.prepare(NodeTestTask.java:107)&#13;
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:75)&#13;
+	at java.util.ArrayList.forEach(ArrayList.java:1257)&#13;
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)&#13;
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:139)&#13;
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)&#13;
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:125)&#13;
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:135)&#13;
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:123)&#13;
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)&#13;
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:122)&#13;
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:80)&#13;
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:32)&#13;
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)&#13;
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:51)&#13;
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:229)&#13;
+	at org.junit.platform.launcher.core.DefaultLauncher.lambda$execute$6(DefaultLauncher.java:197)&#13;
+	at org.junit.platform.launcher.core.DefaultLauncher.withInterceptedStreams(DefaultLauncher.java:211)&#13;
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:191)&#13;
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:137)&#13;
+	at org.eclipse.jdt.internal.junit5.runner.JUnit5TestReference.run(JUnit5TestReference.java:89)&#13;
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:41)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:541)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:763)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:463)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:209)&#13;
+&#13;
+</error>
+    <testcase name="getAllUsersTest" classname="com.luu.controller.UserControllerIntergrationTest" incomplete="true" displayname="getAllUsersTest()" uniqueid="[engine:junit-jupiter]/[class:com.luu.controller.UserControllerIntergrationTest]/[method:getAllUsersTest()]"/>
+    <testcase name="findUserByIdTest" classname="com.luu.controller.UserControllerIntergrationTest" incomplete="true" displayname="findUserByIdTest()" uniqueid="[engine:junit-jupiter]/[class:com.luu.controller.UserControllerIntergrationTest]/[method:findUserByIdTest()]"/>
+    <testcase name="updateUserTest" classname="com.luu.controller.UserControllerIntergrationTest" incomplete="true" displayname="updateUserTest()" uniqueid="[engine:junit-jupiter]/[class:com.luu.controller.UserControllerIntergrationTest]/[method:updateUserTest()]"/>
+    <testcase name="createUserTest" classname="com.luu.controller.UserControllerIntergrationTest" incomplete="true" displayname="createUserTest()" uniqueid="[engine:junit-jupiter]/[class:com.luu.controller.UserControllerIntergrationTest]/[method:createUserTest()]"/>
+    <testcase name="deleteUserTest" classname="com.luu.controller.UserControllerIntergrationTest" incomplete="true" displayname="deleteUserTest()" uniqueid="[engine:junit-jupiter]/[class:com.luu.controller.UserControllerIntergrationTest]/[method:deleteUserTest()]"/>
+  </testsuite>
+</testrun>

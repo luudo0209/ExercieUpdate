@@ -13,6 +13,7 @@ public class UserDTO {
 	
 	public UserDTO(int id, String userName, String email, String address) {
 		super();
+		this.id = id;
 		this.userName = userName;
 		this.email = email;
 		this.address = address;

@@ -1,0 +1,108 @@
+package com.luu.controller;
+
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
+import com.luu.CrudExerciseApplication;
+import com.luu.entity.User;
+import com.luu.model.dto.UserDTO;
+import com.luu.model.request.CreateUserRequest;
+import com.luu.repository.UserRepository;
+import com.luu.service.UserService;
+
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = CrudExerciseApplication.class)
+@AutoConfigureMockMvc
+public class UserControllerIntergrationTest {
+	
+	@Autowired
+	private MockMvc mockMvc;
+	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private UserRepository userRepository;
+	
+	@Autowired
+	private WebApplicationContext wac;
+	
+	public void createUsers() {
+		try {
+			User user = new User("Luu", "luu@gmail.com", "Phu Tho");
+			userRepository.saveAndFlush(user);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+	}
+
+	 @Test
+	 public void getAllUsersTest() throws Exception {
+		createUsers();
+	    mockMvc.perform(MockMvcRequestBuilders
+	    	    .get("/api/user").contentType(MediaType.APPLICATION_JSON))
+	            .andDo(print())
+	            .andExpect(status().isOk());
+	    }
+	 
+	 @Test
+	 public void createUserTest() throws Exception {
+		/*
+		 * CreateUserRequest createUserRequest = new CreateUserRequest("Luu1",
+		 * "luu1@gmail.com", "Phu Tho1"); UserDTO dto = new UserDTO(1, "Luu",
+		 * "luu@gmail.com", "Phu Tho"); when(userService.createUser(createUserRequest));
+		 */
+	String inJson = "{\"userName\":\"Luu1\",\"email\":\"luu1@gmail.com\",\"address\":\"Phu Tho1\"}";
+	   mockMvc.perform( MockMvcRequestBuilders
+			   .post("/api/user")
+			   .content(inJson)
+	       .contentType(MediaType.APPLICATION_JSON)
+	       .accept(MediaType.APPLICATION_JSON))
+	       .andExpect(status().isCreated())
+	       .andExpect(MockMvcResultMatchers.jsonPath("$.userName").exists());
+	 }
+	 
+	 @Test
+	 public void findUserByIdTest() throws Exception {
+		 //createUsers();
+		 mockMvc.perform(get("/api/user/0").contentType(MediaType.APPLICATION_JSON))
+         .andExpect(status().isOk());
+	 }
+	 
+	 @Test
+	 public void deleteUserTest() throws Exception {
+		 when(userService.deleteUser(1)).thenReturn(null);
+		 mockMvc.perform( MockMvcRequestBuilders
+				 .delete("/api/user/1")).andExpect(status().isOk());
+	 }
+	 
+	 @Test
+	 public void updateUserTest() throws Exception {
+//		 CreateUserRequest createUserRequest = new CreateUserRequest("Luu2", "luu2@gmail.com", "Phu Tho2");
+//		 User user = new User("Luu", "luu@gmail.com", "Phu Tho");
+		// when(userService.updateUser(createUserRequest,1)).thenReturn(user);
+	   mockMvc.perform( MockMvcRequestBuilders
+			   .put("/api/user/1")
+	       .contentType(MediaType.APPLICATION_JSON)
+	       .accept(MediaType.APPLICATION_JSON))
+	       .andExpect(status().isCreated())
+	       .andExpect(MockMvcResultMatchers.jsonPath("$.userName").exists());
+	 }
+	  
+
+}

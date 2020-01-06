@@ -1,27 +1,24 @@
 package com.luu.controller;
 
-import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import org.junit.Test;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.luu.CrudExerciseApplication;
 import com.luu.entity.User;
-import com.luu.model.dto.UserDTO;
-import com.luu.model.request.CreateUserRequest;
 import com.luu.repository.UserRepository;
-import com.luu.service.UserService;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = CrudExerciseApplication.class)
 @AutoConfigureMockMvc
@@ -31,69 +28,56 @@ public class UserControllerIntergrationTest {
 	private MockMvc mockMvc;
 	
 	@Autowired
-	private UserService userService;
+	private UserRepository repository;
 	
-	@Autowired
-	private UserRepository userRepository;
-
-	public void createUsers() {
-		try {
-			User user = new User("Luu", "luu@gmail.com", "Phu Tho");
-			userRepository.saveAndFlush(user);
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-		
-	}
-
-	 @Test
+	@Test
 	 public void getAllUsersTest() throws Exception {
-		createUsers();
-	    mockMvc.perform(MockMvcRequestBuilders
-	    	    .get("/api/user").contentType(MediaType.APPLICATION_JSON))
+	    mockMvc.perform(
+	    	    get("/api/user").contentType(MediaType.APPLICATION_JSON))
 	            .andDo(print())
 	            .andExpect(status().isOk());
 	    }
-	 
-	 @Test
-	 public void createUserTest() throws Exception {
-		 CreateUserRequest createUserRequest = new CreateUserRequest("Luu", "luu@gmail.com", "Phu Tho");
-		 UserDTO dto = new UserDTO(1, "Luu", "luu@gmail.com", "Phu Tho");
-		 when(userService.createUser(createUserRequest)).thenReturn(dto);
-	   mockMvc.perform( MockMvcRequestBuilders
-			   .post("/api/user")
-	       .contentType(MediaType.APPLICATION_JSON)
-	       .accept(MediaType.APPLICATION_JSON))
-	       .andExpect(status().isCreated())
-	       .andExpect(MockMvcResultMatchers.jsonPath("$.userName").exists());
-	 }
-	 
+	  
 	 @Test
 	 public void findUserByIdTest() throws Exception {
-		 createUsers();
-		 mockMvc.perform(get("/api/user/1").contentType(MediaType.APPLICATION_JSON))
+		 mockMvc.perform(get("/api/user/7").contentType(MediaType.APPLICATION_JSON))
          .andExpect(status().isOk());
 	 }
 	 
 	 @Test
-	 public void deleteUserTest() throws Exception {
-		 when(userService.deleteUser(1)).thenReturn(null);
-		 mockMvc.perform( MockMvcRequestBuilders
-				 .delete("/api/user/1")).andExpect(status().isOk());
+	 public void updateUserTest() throws Exception {
+		 String inJson = "{\"userName\":\"check1moretime\",\"email\":\"check1@gmail.com\",\"address\":\"check address\"}";
+	   mockMvc.perform(
+			   put("/api/user/8")
+			   .content(inJson)
+	       .contentType(MediaType.APPLICATION_JSON)
+	       .accept(MediaType.APPLICATION_JSON))
+	       .andExpect(status().isOk());
 	 }
 	 
 	 @Test
-	 public void updateUserTest() throws Exception {
-		 CreateUserRequest createUserRequest = new CreateUserRequest("Luu", "luu@gmail.com", "Phu Tho");
-		 User user = new User("Luu", "luu@gmail.com", "Phu Tho");
-		 when(userService.updateUser(createUserRequest,1)).thenReturn(user);
+	 public void deleteUserTest() throws Exception {
+		 List<User> userList = repository.findAll();
+		 int id = 0;
+		 for (User user : userList) {			
+			if (user.getUserId() > id) {
+				id = user.getUserId();
+			}
+		  }
+		 	 mockMvc.perform(
+			 delete("/api/user/"+id)).andExpect(status().isOk());
+	 }
+	 
+	 @Test
+	 public void createUserTest() throws Exception {
+		
+	   String inJson = "{\"userName\":\"test1\",\"email\":\"test1@gmail.com\",\"address\":\"12314u Tho1\"}";
 	   mockMvc.perform( MockMvcRequestBuilders
-			   .put("/api/user/1")
+			   .post("/api/user")
+			   .content(inJson)
 	       .contentType(MediaType.APPLICATION_JSON)
 	       .accept(MediaType.APPLICATION_JSON))
-	       .andExpect(status().isCreated())
-	       .andExpect(MockMvcResultMatchers.jsonPath("$.userName").exists());
-	 }
-	  
-
+	       .andExpect(status().isOk());
+	   }
+	 
 }
