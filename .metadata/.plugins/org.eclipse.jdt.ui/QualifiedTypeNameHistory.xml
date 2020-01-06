@@ -3,4 +3,15 @@
 <fullyQualifiedTypeName name="com.luu.entity.User"/>
 <fullyQualifiedTypeName name="org.springframework.boot.test.web.client.TestRestTemplate"/>
 <fullyQualifiedTypeName name="org.springframework.test.web.servlet.request.MockMvcRequestBuilders"/>
+<fullyQualifiedTypeName name="org.springframework.test.web.servlet.result.MockMvcResultMatchers"/>
+<fullyQualifiedTypeName name="org.junit.Before"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.util.Arrays"/>
+<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+<fullyQualifiedTypeName name="com.luu.service.UserService"/>
+<fullyQualifiedTypeName name="com.luu.model.mapper.UserMapper"/>
+<fullyQualifiedTypeName name="com.luu.model.request.CreateUserRequest"/>
+<fullyQualifiedTypeName name="com.luu.model.dto.UserDTO"/>
+<fullyQualifiedTypeName name="java.lang.Exception"/>
+<fullyQualifiedTypeName name="org.springframework.boot.test.mock.mockito.MockBean"/>
 </qualifiedTypeNameHistroy>

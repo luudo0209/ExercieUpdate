@@ -32,7 +32,7 @@ public class User {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
+	
 	public User(String userName, String email, String address) {
 		super();
 		this.userName = userName;

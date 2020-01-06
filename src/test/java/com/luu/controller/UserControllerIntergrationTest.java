@@ -1,20 +1,16 @@
 package com.luu.controller;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -23,12 +19,11 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import com.luu.CrudExerciseApplication;
 import com.luu.entity.User;
 import com.luu.model.dto.UserDTO;
-import com.luu.model.mapper.UserMapper;
 import com.luu.model.request.CreateUserRequest;
 import com.luu.repository.UserRepository;
 import com.luu.service.UserService;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = CrudExerciseApplication.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = UserController.class)
 @AutoConfigureMockMvc
 public class UserControllerIntergrationTest {
 	
@@ -41,6 +36,16 @@ public class UserControllerIntergrationTest {
 	@Autowired
 	private UserRepository userRepository;
 
+	public void createUsers() {
+		try {
+			User user = new User("Luu", "luu@gmail.com", "Phu Tho");
+			userRepository.saveAndFlush(user);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+	}
+
 	 @Test
 	 public void getAllUsersTest() throws Exception {
 		createUsers();
@@ -49,13 +54,6 @@ public class UserControllerIntergrationTest {
 	            .andDo(print())
 	            .andExpect(status().isOk());
 	    }
-	 
-	 public void createUsers() {
-		 User user = new User("Luu", "luu@gmail.com", "Phu Tho");
-		 //User user1 = new User("Luu1", "luu1@gmail.com", "Phu Tho1");
-	     userRepository.saveAndFlush(user);
-	     //userRepository.saveAndFlush(user1);	        
-	 }
 	 
 	 @Test
 	 public void createUserTest() throws Exception {
@@ -79,14 +77,23 @@ public class UserControllerIntergrationTest {
 	 
 	 @Test
 	 public void deleteUserTest() throws Exception {
-//		 UserDTO user = new UserDTO(1,"luu","luudo@gmail.com", "Tan Trieu");
 		 when(userService.deleteUser(1)).thenReturn(null);
 		 mockMvc.perform( MockMvcRequestBuilders
-				 .delete("/api/user/1")
-				 ).andExpect(status().isOk());
+				 .delete("/api/user/1")).andExpect(status().isOk());
 	 }
 	 
-
+	 @Test
+	 public void updateUserTest() throws Exception {
+		 CreateUserRequest createUserRequest = new CreateUserRequest("Luu", "luu@gmail.com", "Phu Tho");
+		 User user = new User("Luu", "luu@gmail.com", "Phu Tho");
+		 when(userService.updateUser(createUserRequest,1)).thenReturn(user);
+	   mockMvc.perform( MockMvcRequestBuilders
+			   .put("/api/user/1")
+	       .contentType(MediaType.APPLICATION_JSON)
+	       .accept(MediaType.APPLICATION_JSON))
+	       .andExpect(status().isCreated())
+	       .andExpect(MockMvcResultMatchers.jsonPath("$.userName").exists());
+	 }
 	  
 
 }
