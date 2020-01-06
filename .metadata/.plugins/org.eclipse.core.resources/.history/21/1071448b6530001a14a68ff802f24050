@@ -54,6 +54,16 @@ public class UserControllerIntergrationTest {
 	            .andDo(print())
 	            .andExpect(status().isOk());
 	    }
+
+	    private void createTestUser() throws ParseException {
+	        User user = new User("userName", "email", "address");
+	        userRepository.saveAndFlush(user);
+	    }
+	    
+	    @Test
+	    public void testAddEmployee() {
+	    	User user = new User("userName", "email", "address");
+	    }
 	    
 
 }
